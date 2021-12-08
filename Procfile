@@ -1,0 +1,1 @@
+web: gunicorn djando_project.wsgi
