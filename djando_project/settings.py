@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import django_heroku 
 import os
 from pathlib import Path
-import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-$ina=8&b&*o0paiccrxn-(q%2w$1nla*268i@_ow+i*3&=ei7l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'kenz.pythonanywhere.com']
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'djando_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -145,3 +145,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+if DEBUG:
+        STATICFILES_DIRS = [
+            os.path.join(BASE_DIR, 'static')
+       ]
+else:
+        STATIC_ROOT = os.path.join(BASE_DIR, 'static')
